@@ -1,6 +1,6 @@
 class Solution {
     public int reverse(int n) {
-        long revNum = 0;
+long revNum = 0;
         if(n<0){
          n=(-1)*n;   
           while (n > 0) {
