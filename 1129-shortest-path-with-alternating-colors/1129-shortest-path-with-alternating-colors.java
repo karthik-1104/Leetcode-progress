@@ -1,43 +1,42 @@
-enum Color { INIT, RED, BLUE }
+
 class Solution {
-    public int[] shortestAlternatingPaths(int n, int[][] redEdges, int[][] blueEdges){
-        
-         int[] ans = new int[n];
-    Arrays.fill(ans, -1);
-    List<Pair<Integer, Color>>[] graph = new List[n];
-    Queue<Pair<Integer, Color>> q = new ArrayDeque<>(List.of(new Pair<>(0, Color.INIT)));
-
-    for (int i = 0; i < n; ++i)
-      graph[i] = new ArrayList<>();
-
-    for (int[] edge : redEdges) {
-      final int u = edge[0];
-      final int v = edge[1];
-      graph[u].add(new Pair<>(v, Color.RED));
-    }
-
-    for (int[] edge : blueEdges) {
-      final int u = edge[0];
-      final int v = edge[1];
-      graph[u].add(new Pair<>(v, Color.BLUE));
-    }
-
-    for (int step = 0; !q.isEmpty(); ++step)
-      for (int sz = q.size(); sz > 0; --sz) {
-        final int u = q.peek().getKey();
-        Color prevColor = q.poll().getValue();
-        ans[u] = ans[u] == -1 ? step : ans[u];
-        for (int i = 0; i < graph[u].size(); ++i) {
-          Pair<Integer, Color> node = graph[u].get(i);
-          final int v = node.getKey();
-          Color edgeColor = node.getValue();
-          if (v == -1 || edgeColor == prevColor)
-            continue;
-          q.add(new Pair<>(v, edgeColor));
-          graph[u].set(i, new Pair<>(-1, edgeColor));
+    public int[] shortestAlternatingPaths(int n, int[][] red_edges, int[][] blue_edges){
+       Set<Integer>[][] graph = new HashSet[2][n];
+        for (int i = 0; i < n; i++) {
+            graph[0][i] = new HashSet<>();
+            graph[1][i] = new HashSet<>();
         }
-      }
-
-    return ans;
+        for (int[] re : red_edges) {
+            graph[0][ re[0] ].add(re[1]);
+        }
+        for (int[] blu : blue_edges) {
+            graph[1][ blu[0] ].add(blu[1]);
+        }
+        int[][] res = new int[2][n];
+        for (int i = 1; i < n; i++) {
+            res[0][i] = 2 * n;
+            res[1][i] = 2 * n;
+        }
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[] {0, 0}); 
+        q.offer(new int[] {0, 1}); 
+        while (!q.isEmpty()) {
+            int[] cur = q.poll();
+            int vert = cur[0];
+            int colr = cur[1];
+           
+            for (int nxt : graph[1 - colr][vert]) {
+                if (res[1 - colr][nxt] == 2 * n) {
+                    res[1 - colr][nxt] = 1 + res[colr][vert];
+                    q.offer(new int[] {nxt, 1 - colr});
+                }
+            }
+        }
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            int t = Math.min(res[0][i], res[1][i]);
+            ans[i] = (t == 2 * n) ? -1 : t;
+        }
+        return ans;
     }
 }
