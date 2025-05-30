@@ -1,7 +1,7 @@
 class Solution {
     public int minFlips(int a, int b, int c) {
         int flip=0;
-        for(int i=0;i<=32;i++){
+        for(int i=0;i<32;i++){
 
             int num1=(a>>i)&1;
             int num2=(b>>i)&1;
