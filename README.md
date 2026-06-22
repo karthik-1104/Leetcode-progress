@@ -11,4 +11,8 @@ I update the programs i have done on leetcode here.
 | Problem Name | Difficulty |
 | ------- | ------- |
 | [0001-two-sum](https://github.com/karthik-1104/Leetcode-progress/tree/main/0001-two-sum/) | Easy |
+## String
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0008-string-to-integer-atoi](https://github.com/karthik-1104/Leetcode-progress/tree/main/0008-string-to-integer-atoi/) | Medium |
 <!---LeetCode Topics End-->
