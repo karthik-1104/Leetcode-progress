@@ -15,4 +15,8 @@ I update the programs i have done on leetcode here.
 | Problem Name | Difficulty |
 | ------- | ------- |
 | [0008-string-to-integer-atoi](https://github.com/karthik-1104/Leetcode-progress/tree/main/0008-string-to-integer-atoi/) | Medium |
+## Math
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0009-palindrome-number](https://github.com/karthik-1104/Leetcode-progress/tree/main/0009-palindrome-number/) | Easy |
 <!---LeetCode Topics End-->
